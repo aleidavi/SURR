@@ -15,6 +15,7 @@ class Landlord(models.Model):
 	mailing_address = models.CharField()
 
 	# dunder init method to have this object return
-	# the object's Landlord Profile Name
+	# the object's Landlord Profil
+	# Name
 	def __str__(self):
 		return self.first_name + ' ' + self.last_name
