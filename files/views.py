@@ -3,7 +3,7 @@
 '''
 
 from django.http import JsonResponse
-from .models import Landlord
+from .models import Landlord, Tenant, Property
 from .serializers import LandlordSerializer
 #from rest_framework import mixins
 #from rest_framework import generics

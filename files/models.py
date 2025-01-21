@@ -20,12 +20,24 @@ class Landlord(models.Model):
 	def __str__(self):
 		return self.first_name + ' ' + self.last_name
 	
-
-	
-
 	# Meta class used inside of landlord simply to format data
 	# when Landlord model is called upon
 	# Landlord instance data will be ordered based on first_name
-	class Meta:
-		ordering = ['first_name']
+	# class Meta:
+		#ordering = ['first_name']
+
+class Tenant(models.Model):
+	current_address = models.CharField(max_length=300)
+	phone_number = models.CharField(max_length=15, validators=[
+		RegexValidator(r'^\+?1?\d{9,15}$', message="Phone number must be entered in this format: '+[Country Code][Number]'. Up to 15 digits allowed.")
+	])
+	email = models.CharField(max_length=200)
+
+
+class Property(models.Model):
+	property_type = models.CharField(max_length=200)
+	quantity = models.IntegerField()
+	monthly_rent = models.BigIntegerField()
+	
+
 	
