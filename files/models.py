@@ -17,12 +17,15 @@ class Landlord(models.Model):
 	# dunder init method to have this object return
 	# the object's Landlord Profile
 	# Name
-	#def __str__(self):
-		#return self.first_name + ' ' + self.last_name
+	def __str__(self):
+		return self.first_name + ' ' + self.last_name
 	
+
+	
+
 	# Meta class used inside of landlord simply to format data
 	# when Landlord model is called upon
 	# Landlord instance data will be ordered based on first_name
-	#class Meta:
-		#ordering = ['first_name']
+	class Meta:
+		ordering = ['first_name']
 	
