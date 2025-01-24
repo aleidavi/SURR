@@ -26,14 +26,14 @@ def home_landlord_list(request, format=None):
 		#3. return json object/dict after serializing above
 		return Response(serializer.data, status=status.HTTP_200_OK)
 
-api_view(['GET'])
-def home_properties_list(request, format=None):
+@api_view(['GET'])
+def home_property_list(request, format=None):
 	if request.method == 'GET':
 		properties = Property.objects.all()
 
 		serializer = PropertySerializer(properties, many=True)
 
-		return Response({serializer.data}, status=status.HTTP_200_OK)
+		return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['GET', 'POST'])
 def landlord_list(request, format=None):
