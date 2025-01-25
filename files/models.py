@@ -32,7 +32,6 @@ class Landlord(models.Model):
 		ordering = ['first_name']
 
 class Tenant(models.Model):
-	
 	username = models.CharField(max_length=500)
 	password = models.CharField(max_length=50)
 	current_address = models.CharField(max_length=500)

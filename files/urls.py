@@ -18,13 +18,18 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from . import views
+from .views import home_staff_views, landlord_views, property_views, tenant_views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-	path('home/landlords', views.home_landlord_list),
-	path('home/properties', views.home_property_list),
-	path('landlords/', views.landlord_list),
-	path('landlords/<int:pk>', views.landlord_detail),
+	path('home/landlords', home_staff_views.home_landlord_list),
+	path('home/properties', home_staff_views.home_property_list),
+	path('home/tenants', home_staff_views.home_tenants_list),
+	
+	path('landlords/', landlord_views.landlord_list),
+	path('landlords/<int:pk>', landlord_views.landlord_detail),
+	
+	path('landlords/<int:pk>/properties', property_views.landlord_property_list)
+	
 ]
