@@ -3,8 +3,8 @@
 	endpoints associated with PROPERTY endpoints
 '''
 from django.http import JsonResponse
-from ..models import Landlord, Property, Tenant, TenantProperty
-from ..serializers import LandlordSerializer, TenantSerializer, PropertySerializer, TenantPropertySerializer
+from ..models import Landlord, Property, Tenant
+from ..serializers import LandlordSerializer, TenantSerializer, PropertySerializer
 from rest_framework.decorators import api_view
 from django.http import Http404
 from rest_framework.response import Response
@@ -12,8 +12,8 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 
 
-@api_view(['GET', 'POST', 'DELETE'])
-def landlord_property_list(request, pk, format=None):
+@api_view(['GET', 'POST', 'DELETE']) 
+def landlord_property_list(request, landlord_id, format=None):
 	"""
 		Endpoint route allows landlord user to:
 			read all properties, of the current landlord,
@@ -21,61 +21,77 @@ def landlord_property_list(request, pk, format=None):
 			and delete a property from the properties list belonging to the landlord.
 	"""
 	try:
-		landlord = Landlord.objects.get(pk=pk)
+		landlord = Landlord.objects.get(pk=landlord_id)
 	except Landlord.DoesNotExist:
-		response_message = {'message': f'Landlord {pk} not found.'}
+		response_message = {'message': f'Landlord {landlord_id} not found.'}
 		return Response(response_message, status=status.HTTP_404_NOT_FOUND)
 	
-	landlord_property_id_list = landlord.properties
-	if request.method == 'GET':
-		properties_list = Property.objects.all().filter(id__in=landlord_property_id_list)
-		serializer = PropertySerializer(properties_list)
 
+	# GET All properties of landlord_id
+	landlord_property_list = landlord.properties.all()
+
+	if request.method == 'GET':
+		serializer = PropertySerializer(landlord_property_list, many=True)
 		return Response(serializer.data, status=status.HTTP_200_OK)
 	
-	
+	# POST new property to landlord_id
 	elif request.method == 'POST':
-		new_property_id = request.data.get('id', None)
-		if new_property_id == None:
-			return Response({'error': 'Property ID required. New property cannot be added without it\'s property_id'},
-				   status=status.HTTP_400_BAD_REQUEST)
 		
-		landlord.properties.append(new_property_id)
-		landlord.save()
-
-		serializer = LandlordSerializer(data=request.data)
+		serializer = PropertySerializer(data=request.data)
 		if serializer.is_valid():
-			serializer.save()
+			new_property = serializer.save(landlord=landlord)
 
 			# Used to return a response OBJ and a status value i.e. 201
-			response_message = {'message': 'New property posted to Landlord {pk} list successfully created.'}
+			response_message = {'message': f'New property posted to Landlord {landlord_id} list successfully created.'}
 			return Response(response_message, serializer.data, status=status.HTTP_201_CREATED)
 
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+	# DELETE a property from landlord_id properties
 	elif request.method == 'DELETE':
 		current_property_id = request.data.get('id', None)
 		
 		if current_property_id is None:
-			return Response({'error': 'Property ID is required.'}, status=status.HTTP_400_BAD_REQUEST)
+			return Response({'error': 'Property selected for deletion is invalid.'}, status=status.HTTP_400_BAD_REQUEST)
 
-		elif current_property_id in landlord.properties:
-			index = landlord.properties.find(current_property_id)
-			landlord.properties.pop(index)
-			landlord.save()
-
-			property_instance = get_object_or_404(Property, pk=current_property_id)
-			property_instance.delete()
 		
-			response_message = {'message': f'Property {current_property_id}, data has been removed from {pk}.'}
-			return Response(response_message, status=status.HTTP_200_OK)
-		else:
-			return Response({'error': 'Property ID not found in landlord\'s properties.'}, status=status.HTTP_400_BAD_REQUEST)
+		property_instance = get_object_or_404(Property, pk=current_property_id, landlord=landlord)
+		property_instance.delete()
+		
+		response_message = {'message': f'Property {current_property_id}, data has been removed from Landlord {landlord_id}.'}
+		return Response(response_message, status=status.HTTP_200_OK)
 
-@api_view([])
-def landlord_property_detail(request, pk, format=None):
+
+@api_view(['GET', 'PATCH'])
+def landlord_property_detail(request, landlord_id, property_id, format=None):
 	"""
 	 GET /landlords/<landlord_id>/properties/<property_id> -> 
-	 PATCH /landlords/<landlord_id>/properties/<property_id>  ->
-	"""	
+	 	Get the current property of property_id, for landlord_id specified
+		 
+	 PATCH /landlords/<landlord_id>/properties/<property_id> ->
+	 	Update the current property of property_id for landlord_id specified
+
+	"""
+
+
+	try:
+		current_property = Property.objects.get(pk=property_id)
+	except Property.DoesNotExist:
+		response_message = {'message': f'Property {property_id} not found.'}
+		return Response(response_message, status=status.HTTP_404_NOT_FOUND)
+
+	if request.method == 'GET':
+		serializer = PropertySerializer(current_property)
+		return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+	elif request.method == 'PATCH':
+		serializer = PropertySerializer(current_property, data=request.data, partial=True)
+		if serializer.is_valid():
+			serializer.save()
+		response_message={'message': f'Property {property_id} information successfully updated.'}
+		return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
 	

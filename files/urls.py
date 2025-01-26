@@ -28,8 +28,13 @@ urlpatterns = [
 	path('home/tenants', home_staff_views.home_tenants_list),
 	
 	path('landlords/', landlord_views.landlord_list),
-	path('landlords/<int:pk>', landlord_views.landlord_detail),
+	path('landlords/<int:landlord_id>', landlord_views.landlord_detail),
 	
-	path('landlords/<int:pk>/properties', property_views.landlord_property_list)
+	path('landlords/<int:landlord_id>/properties', property_views.landlord_property_list),
+	path('landlords/<int:landlord_id>/properties/<property_id>', property_views.landlord_property_detail),
 	
+	path('tenants/', tenant_views.tenant_list),
+	path('tenants/<int:tenant_id>', tenant_views.tenant_account_detail),
+	path('tenants/<int:tenant_id>/properties', tenant_views.tenant_properties_detail)
 ]
+#

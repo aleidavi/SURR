@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Landlord, Tenant, Property, TenantProperty
+from .models import Landlord, Tenant, Property
 
 class LandlordSerializer(serializers.ModelSerializer):
 	class Meta:
@@ -19,7 +19,7 @@ class PropertySerializer(serializers.ModelSerializer):
 		model = Property
 		fields = '__all__'
 #
-class TenantPropertySerializer(serializers.ModelSerializer):
-	class Meta:
-		model = TenantProperty
-		fields = '__all__'
+#class TenantPropertySerializer(serializers.ModelSerializer):
+	#class Meta:
+		#model = TenantProperty
+		#fields = '__all__'

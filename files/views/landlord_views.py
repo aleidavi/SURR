@@ -4,7 +4,7 @@
 
 '''
 from django.http import JsonResponse
-from ..models import Landlord, Property, Tenant, TenantProperty
+from ..models import Landlord, Property, Tenant
 from ..serializers import LandlordSerializer, PropertySerializer
 from rest_framework.decorators import api_view
 from django.http import Http404
@@ -17,6 +17,7 @@ def landlord_list(request, format=None):
 		serializer = LandlordSerializer(data=request.data)
 		if serializer.is_valid():
 			serializer.save()
+
 			# Used to return a response OBJ and a status value i.e. 201
 			response_message = {'message': 'New Landlord profile successfully created.'}
 			return Response(response_message, serializer.data, status=status.HTTP_201_CREATED)
@@ -24,12 +25,12 @@ def landlord_list(request, format=None):
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 	
 
-@api_view(['GET','PATCH' 'DELETE'])
-def landlord_detail(request, pk, format=None):
+@api_view(['GET','PATCH', 'DELETE'])
+def landlord_detail(request, landlord_id, format=None):
 		try:
-			landlord = Landlord.objects.get(pk=pk)
+			landlord = Landlord.objects.get(pk=landlord_id)
 		except Landlord.DoesNotExist:
-			response_message = {'error message': f'This {pk} specified landlord, does not exist.'}
+			response_message = {'error message': f'This specified landlord {landlord_id}, does not exist.'}
 			return Response(response_message, status=status.HTTP_404_NOT_FOUND)
 	
 		if request.method == 'GET':
@@ -44,6 +45,6 @@ def landlord_detail(request, pk, format=None):
 		
 		elif request.method == 'DELETE':
 			landlord.delete()
-			response_message = {'message': f'Landlord {pk}, data has been removed.'}
+			response_message = {'message': f'Landlord {landlord_id}, data has been removed.'}
 			return Response(response_message, status=status.HTTP_200_OK)
 

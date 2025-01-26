@@ -8,8 +8,8 @@
 	- possibly add a view of ALL tenants (who've created an account)
 '''
 from django.http import JsonResponse
-from ..models import Landlord, Property, Tenant, TenantProperty
-from ..serializers import LandlordSerializer, TenantSerializer, PropertySerializer, TenantPropertySerializer
+from ..models import Landlord, Property, Tenant
+from ..serializers import LandlordSerializer, TenantSerializer, PropertySerializer
 from rest_framework.decorators import api_view
 from django.http import Http404
 from rest_framework.response import Response
@@ -52,4 +52,3 @@ def home_tenants_list(request, format=None):
 		tenants = Landlord.objects.all()
 		serializer = TenantSerializer(tenants, many=True)
 		return Response(serializer.data, status=status.HTTP_200_OK)
-
