@@ -1,0 +1,76 @@
+[
+{
+  "model": "files.landlord",
+  "pk": 1,
+  "fields": {
+    "username": "jhaas",
+    "password": "Those western region staff camera.",
+    "first_name": "Sandra",
+    "last_name": "Edwards",
+    "business_name": "Drug part team significant almost nothing culture. Administration heavy feeling last common on. On tell go provide ground hospital. Article major remain radio hear piece record.",
+    "phone_number": "524-322-9961",
+    "email": "gomezjustin@example.com",
+    "mailing_address": "Subject reason seven commercial. Commercial its pattern edge foot television will.\nProbably thank six color section reveal. Or education class onto line trade. Mission share there save."
+  }
+},
+{
+  "model": "files.landlord",
+  "pk": 2,
+  "fields": {
+    "username": "oscar10",
+    "password": "Place phone too them program.",
+    "first_name": "Jermaine",
+    "last_name": "Todd",
+    "business_name": "Find left all create. Top executive establish throughout nature alone. Nearly ok thing.\nOrder century among data his campaign among. Cup involve final treat least out. Also ball large street.",
+    "phone_number": "+1-805-258-4955",
+    "email": "oscar59@example.com",
+    "mailing_address": "Music its machine white. Like myself standard notice onto skin. Order property another stock red.\nInternational coach soldier cold. Half picture look my of miss."
+  }
+},
+{
+  "model": "files.property",
+  "pk": 2,
+  "fields": {
+    "address": "360 Lisa Valley Suite 123\nKristimouth, OH 79643",
+    "unit_quantity": 2341,
+    "property_type": "Require southern participant different beyond must. Religious second himself career still right.\nBorn force hour recently election important minute.",
+    "monthly_rent": 2680999525743253374,
+    "last_increase_date": "2023-05-16",
+    "rent_increase_percentage": 18804,
+    "ocupancy_start_date": "1998-09-14",
+    "ocupancy_status": "Have activity so in.",
+    "landlord": 1
+  }
+},
+{
+  "model": "files.property",
+  "pk": 3,
+  "fields": {
+    "address": "199 Haney Burg\nPort Jamesborough, DC 78824",
+    "unit_quantity": 26994,
+    "property_type": "Professor step firm. President begin goal determine happy others.\nDespite knowledge choose order give.\nMoney determine wide people budget. Enough career station ability else specific.",
+    "monthly_rent": 8545785639251511469,
+    "last_increase_date": "1981-06-15",
+    "rent_increase_percentage": 22786,
+    "ocupancy_start_date": "1987-12-18",
+    "ocupancy_status": "Film fight much.",
+    "landlord": 1
+  }
+},
+{
+  "model": "files.tenant",
+  "pk": 1,
+  "fields": {
+    "username": "hillwilliam",
+    "password": "Deal television write receive.",
+    "current_address": "Simply each draw. Oil seek threat official participant side degree. Admit hear whatever maintain shoulder kind his.\nQuestion let somebody the federal. Data put value also health yet popular.\nLearn newspaper many others interview speak player. Knowledge particularly throughout challenge common camera hundred statement.\nFree trip miss run itself. Quality together free east.\nCommercial new break war. Continue issue show quality. Decide prepare kind design knowledge state.",
+    "phone_number": "001-914-981-283",
+    "email": "bennettashley@example.net",
+    "monthly_rent": 2860712001590831853,
+    "landlord": 1,
+    "tenant_properties": [
+      3
+    ]
+  }
+}
+]
