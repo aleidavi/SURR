@@ -14,6 +14,13 @@ from rest_framework import status
 @api_view(['POST'])
 def landlord_list(request, format=None):
 	if request.method == 'POST':
+		new_username = request.data.get('username', None)
+		if new_username == None:
+			return Response({'error': 'Username is required.'}, status=status.HTTP_400_BAD_REQUEST)
+		
+		if Landlord.objects.filter(username=new_username).exists():
+			return Response({'error': 'The username entered is not available. Please choose a different username.'}, status=status.HTTP_400_BAD_REQUEST)
+
 		serializer = LandlordSerializer(data=request.data)
 		if serializer.is_valid():
 			serializer.save()
