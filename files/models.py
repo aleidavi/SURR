@@ -16,7 +16,7 @@ class Landlord(models.Model):
 
 	email = models.CharField(max_length=200)
 	mailing_address = models.CharField(max_length=200)
-	#properties = ArrayField(models.IntegerField(), blank=True, default=list)
+
 
 	# dunder init method to have this object return
 	# the object's Landlord Profile
@@ -33,7 +33,6 @@ class Landlord(models.Model):
 
 
 
-
 class Property(models.Model):
 
 	address = models.CharField(max_length=300)
@@ -45,7 +44,7 @@ class Property(models.Model):
 	ocupancy_start_date = models.DateField(null=True, blank=True, default=None)
 	ocupancy_status = models.CharField(max_length=25)
 	landlord = models.ForeignKey(Landlord, on_delete=models.CASCADE, related_name='properties')
-	#tenants = ArrayField(models.IntegerField(), blank=True, default=list)
+
 
 class Tenant(models.Model):
 	username = models.CharField(max_length=500)
@@ -56,12 +55,6 @@ class Tenant(models.Model):
 	])
 	email = models.CharField(max_length=200)
 	monthly_rent = models.PositiveBigIntegerField()
-	#properties = ArrayField(models.IntegerField(), blank=True, default=list)
+	
 	landlord = models.ForeignKey(Landlord, on_delete=models.CASCADE, related_name='tenants')
 	tenant_properties = models.ManyToManyField(Property, related_name='properties')
-
-#
-
-#class TenantProperty(models.Model):
-	#tenant = models.ForeignKey(Tenant, on_delete=models.CASCADE)
-	#property = models.ForeignKey(Property, on_delete=models.CASCADE)

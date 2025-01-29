@@ -25,9 +25,9 @@ def landlord_list(request, format=None):
 		if serializer.is_valid():
 			serializer.save()
 
+			# TO - DO -> Remove response message
 			# Used to return a response OBJ and a status value i.e. 201
-			response_message = {'message': 'New Landlord profile successfully created.'}
-			return Response(response_message, serializer.data, status=status.HTTP_201_CREATED)
+			return Response(serializer.data, status=status.HTTP_201_CREATED)
 		
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 	
@@ -54,4 +54,3 @@ def landlord_detail(request, landlord_id, format=None):
 			landlord.delete()
 			response_message = {'message': f'Landlord {landlord_id}, data has been removed.'}
 			return Response(response_message, status=status.HTTP_200_OK)
-

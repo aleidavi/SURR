@@ -3,8 +3,8 @@
 	endpoints associated with PROPERTY endpoints
 '''
 from django.http import JsonResponse
-from ..models import Landlord, Property, Tenant
-from ..serializers import LandlordSerializer, TenantSerializer, PropertySerializer
+from files.models import Landlord, Property, Tenant
+from files.serializers import LandlordSerializer, PropertySerializer
 from rest_framework.decorators import api_view
 from django.http import Http404
 from rest_framework.response import Response
@@ -37,13 +37,15 @@ def landlord_property_list(request, landlord_id, format=None):
 	# POST new property to landlord_id
 	elif request.method == 'POST':
 		
-		serializer = PropertySerializer(data=request.data)
+		
+		updated_data = request.data
+		updated_data['landlord'] = landlord_id
+		serializer = PropertySerializer(data=updated_data)
 		if serializer.is_valid():
-			new_property = serializer.save(landlord=landlord)
+			serializer.save()
 
 			# Used to return a response OBJ and a status value i.e. 201
-			response_message = {'message': f'New property posted to Landlord {landlord_id} list successfully created.'}
-			return Response(response_message, serializer.data, status=status.HTTP_201_CREATED)
+			return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -65,10 +67,10 @@ def landlord_property_list(request, landlord_id, format=None):
 @api_view(['GET', 'PATCH'])
 def landlord_property_detail(request, landlord_id, property_id, format=None):
 	"""
-	 GET /landlords/<landlord_id>/properties/<property_id> -> 
+	 GET /landlords/landlord_id/properties/<property_id> -> 
 	 	Get the current property of property_id, for landlord_id specified
 		 
-	 PATCH /landlords/<landlord_id>/properties/<property_id> ->
+	 PATCH /landlords/landlord_id/properties/<property_id> ->
 	 	Update the current property of property_id for landlord_id specified
 
 	"""

@@ -37,4 +37,3 @@ urlpatterns = [
 	path('tenants/<int:tenant_id>', tenant_views.tenant_account_detail),
 	path('tenants/<int:tenant_id>/properties', tenant_views.tenant_properties_detail)
 ]
-#

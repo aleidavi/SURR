@@ -28,7 +28,7 @@ def home_landlord_list(request, format=None):
 		landlords = Landlord.objects.all()
 		# 2. serialize them (the landlords model obj)
 		serializer = LandlordSerializer(landlords, many=True)
-		#3. return json object/dict after serializing above
+		# 3. return json object/dict after serializing above
 		return Response(serializer.data, status=status.HTTP_200_OK)
 	
 

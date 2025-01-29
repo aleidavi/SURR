@@ -18,8 +18,5 @@ class PropertySerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Property
 		fields = '__all__'
-#
-#class TenantPropertySerializer(serializers.ModelSerializer):
-	#class Meta:
-		#model = TenantProperty
-		#fields = '__all__'
+
+
