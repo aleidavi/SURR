@@ -29,12 +29,12 @@ SECRET_KEY=os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-CORS_ALLOWED_ORIGINS = [
-    "https://your-react-frontend-domain.com",
-    "http://localhost:3000",  # for local development
-]
+#CORS_ALLOWED_ORIGINS = [
+    #"https://your-react-frontend-domain.com",
+    #"http://localhost:3000",  # for local development
+#]
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
+ALLOWED_HOSTS = ['https://surr-92ba55f1fcdd.herokuapp.com/']
 
 
 # Application definition
@@ -139,8 +139,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Add this for collectstatic
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')  # Add this for collectstatic
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 # Whitenoise static file compression
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
