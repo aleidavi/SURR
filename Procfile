@@ -1,1 +1,1 @@
-web: gunicorn SURR.files.wsgi --log-file -
+web: gunicorn files.wsgi --log-file -
