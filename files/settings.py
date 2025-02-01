@@ -31,10 +31,10 @@ DEBUG = False
 
 CORS_ALLOWED_ORIGINS = [
     "https://your-react-frontend-domain.com",
-    "http://localhost:5173",  # for local development
+    "http://localhost:5000",  # for local development
 ]
 
-ALLOWED_HOSTS = ['https://surr-92ba55f1fcdd.herokuapp.com/']
+ALLOWED_HOSTS = ['https://surr-92ba55f1fcdd.herokuapp.com/','http://127.0.0.1:8000/' ]
 
 
 # Application definition
@@ -94,14 +94,14 @@ DATABASES = {
 }
 
 #DATABASES = {
-    #'default': {
-        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        #'NAME': 'surr_development',
-        #'USER': 'aleidavieyra',
-        #'PASSWORD': 'salmarios21',
-        #'HOST': '127.0.0.1',
-        #'PORT': '5432',
-    #}
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'surr_development',
+#        'USER': 'aleidavieyra',
+#        'PASSWORD': 'salmarios21',
+#        'HOST': '127.0.0.1',
+#        'PORT': '5432',
+#    }
 #}
 
 # Password validation
