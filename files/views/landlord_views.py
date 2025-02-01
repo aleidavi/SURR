@@ -15,7 +15,6 @@ from rest_framework import status
 def landlord_list(request, format=None):
 
 	landlords_list = Landlord.objects.all()
-
 	if request.method == 'GET':
 		serializer = LandlordSerializer(landlords_list, many=True)
 		return Response(serializer.data, status=status.HTTP_200_OK)
