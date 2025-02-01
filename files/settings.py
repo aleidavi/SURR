@@ -29,12 +29,12 @@ SECRET_KEY=os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-CORS_ALLOWED_ORIGINS = [
-    "https://your-react-frontend-domain.com",
-    "http://localhost:5000",  # for local development
-]
+#CORS_ALLOWED_ORIGINS = [
+#    "https://your-react-frontend-domain.com",
+#    "http://localhost:3000",  # for local development
+#]
 
-ALLOWED_HOSTS = ['https://surr-92ba55f1fcdd.herokuapp.com/','http://127.0.0.1:8000/' ]
+ALLOWED_HOSTS = ['https://surr-92ba55f1fcdd.herokuapp.com/']
 
 
 # Application definition
