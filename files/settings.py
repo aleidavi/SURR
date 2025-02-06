@@ -14,6 +14,7 @@ from pathlib import Path
 import dj_database_url
 import os
 from dotenv import load_dotenv
+from corsheaders.defaults import default_headers
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,15 +28,18 @@ load_dotenv()
 SECRET_KEY=os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True # Changed to True for Debugging
 
-#CORS_ALLOWED_ORIGINS = [
-#    "https://your-react-frontend-domain.com",
-#    "http://localhost:3000",  # for local development
-#]
+#CORS_ALLOW_HEADERS = list(default_headers) + ["referer", "sec-ch-ua", "sec-ch-ua-mobile","sec-ch-ua-platform"]
 
-ALLOWED_HOSTS = ['https://surr-92ba55f1fcdd.herokuapp.com/']
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",  # for local development
+	"http://localhost:5000",
+]
 
+CORS_ORIGIN_ALLOW_ALL = False
+
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 # Application definition
 
@@ -53,6 +57,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+	'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
 	'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -61,7 +66,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-	'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'files.urls'
@@ -89,20 +93,20 @@ WSGI_APPLICATION = 'files.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 # For Heroku Deployment Database configuration:
-DATABASES = {
-    'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
-}
-
 #DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#        'NAME': 'surr_development',
-#        'USER': 'aleidavieyra',
-#        'PASSWORD': 'salmarios21',
-#        'HOST': '127.0.0.1',
-#        'PORT': '5432',
-#    }
+#    'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
 #}
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'surr_development',
+        'USER': 'aleidavieyra',
+        'PASSWORD': 'salmarios21',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

@@ -21,7 +21,9 @@ def landlord_property_list(request, landlord_id, format=None):
 			and delete a property from the properties list belonging to the landlord.
 	"""
 	try:
+		#print('Checking prior to landlord ID')
 		landlord = Landlord.objects.get(pk=landlord_id)
+		#print(f'Landlord of id {landlord_id}')
 	except Landlord.DoesNotExist:
 		response_message = {'message': f'Landlord {landlord_id} not found.'}
 		return Response(response_message, status=status.HTTP_404_NOT_FOUND)
@@ -29,14 +31,12 @@ def landlord_property_list(request, landlord_id, format=None):
 
 	# GET All properties of landlord_id
 	landlord_property_list = landlord.properties.all()
-
 	if request.method == 'GET':
 		serializer = PropertySerializer(landlord_property_list, many=True)
 		return Response(serializer.data, status=status.HTTP_200_OK)
 	
 	# POST new property to landlord_id
 	elif request.method == 'POST':
-		
 		
 		updated_data = request.data
 		updated_data['landlord'] = landlord_id
