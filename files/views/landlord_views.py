@@ -11,14 +11,23 @@ from django.http import Http404
 from rest_framework.response import Response
 from rest_framework import status
 
-@api_view(['POST'])
+@api_view(['GET', 'POST'])
 def landlord_list(request, format=None):
+
+	all_landlords_list = Landlord.objects.all()
+	if request.method == 'GET':
+		serializer = LandlordSerializer(all_landlords_list, many=True)
+		return Response(serializer.data, status=status.HTTP_200_OK)
+
+
 	if request.method == 'POST':
 		new_username = request.data.get('username', None)
 		if new_username == None:
+			print(new_username)
 			return Response({'error': 'Username is required.'}, status=status.HTTP_400_BAD_REQUEST)
 		
 		if Landlord.objects.filter(username=new_username).exists():
+			print(Landlord.objects.filter(username=new_username).exists())
 			return Response({'error': 'The username entered is not available. Please choose a different username.'}, status=status.HTTP_400_BAD_REQUEST)
 
 		serializer = LandlordSerializer(data=request.data)
