@@ -37,7 +37,7 @@ CORS_ALLOWED_ORIGINS = [
 	"http://localhost:5000",
 ]
 
-CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_ALLOW_ALL = True
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 	'rest_framework',
-	'corsheaders'
+	'corsheaders',
+	'rest_framework_simplejwt.token_blacklist',
 ]
 
 MIDDLEWARE = [
