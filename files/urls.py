@@ -17,12 +17,19 @@ Including another URLconf
 
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from .views import home_staff_views, landlord_views, property_views, tenant_views
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from .views.landlord_views import CreateUserView
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+	path('api/user/register/', CreateUserView.as_view(), name='register'),
+	path('api/token/', TokenObtainPairView.as_view(), name='get_token'),
+	path('api/token/refresh/', TokenRefreshView.as_view(), name='refresh'),
+	path('api-auth/', include('rest_framework.urls')),
 	path('home/landlords', home_staff_views.home_landlord_list),
 	path('home/properties', home_staff_views.home_property_list),
 	path('home/tenants', home_staff_views.home_tenants_list),

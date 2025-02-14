@@ -9,7 +9,21 @@ from ..serializers import LandlordSerializer, PropertySerializer
 from rest_framework.decorators import api_view
 from django.http import Http404
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, generics
+
+# From Tech with Tim Tutorial:
+from django.shortcuts import render
+from django.contrib.auth.models import User
+from rest_framework.permissions import IsAuthenticated, AllowAny
+
+
+# Login User
+class CreateUserView(generics.CreateAPIView):
+	queryset = User.objects.all()
+	serializer_class = User
+	permission_classes = [AllowAny]
+
+
 
 @api_view(['GET', 'POST'])
 def landlord_list(request, format=None):
