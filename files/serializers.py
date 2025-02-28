@@ -1,11 +1,18 @@
 from rest_framework import serializers
 from .models import Landlord, Tenant, Property
 
+
+
 class LandlordSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Landlord
 
-		fields = '__all__'
+		fields = ['id', 'username', 'password']
+		extra_kwargs = {'password': {'write_only': True}}
+
+		def create(self, validated_data):
+			landlord = Landlord.objects.create_user(**validated_data)
+			return landlord
 
 
 class TenantSerializer(serializers.ModelSerializer):
