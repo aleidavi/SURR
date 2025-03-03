@@ -4,6 +4,9 @@ from .models import Landlord, Tenant, Property
 from django.contrib.auth.models import User
 
 
+
+
+
 class LandlordSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Landlord

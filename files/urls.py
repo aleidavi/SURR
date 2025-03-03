@@ -30,6 +30,7 @@ urlpatterns = [
 	path('api/token/', TokenObtainPairView.as_view(), name='get_token'),
 	path('api/token/refresh/', TokenRefreshView.as_view(), name='refresh'),
 	path('api-auth/', include('rest_framework.urls')),
+    
 	path('home/landlords', home_staff_views.home_landlord_list),
 	path('home/properties', home_staff_views.home_property_list),
 	path('home/tenants', home_staff_views.home_tenants_list),

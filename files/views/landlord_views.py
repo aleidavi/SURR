@@ -20,7 +20,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 # Login User
 class CreateUserView(generics.CreateAPIView):
 	queryset = User.objects.all()
-	serializer_class = User
+	serializer_class = LandlordSerializer
 	permission_classes = [AllowAny]
 
 
