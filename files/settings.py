@@ -34,7 +34,7 @@ DEBUG = False
 #    "http://localhost:3000",  # for local development
 #]
 
-ALLOWED_HOSTS = ['https://surr-92ba55f1fcdd.herokuapp.com/']
+ALLOWED_HOSTS = ['https://surr-92ba55f1fcdd.herokuapp.com/', 'localhost',]
 
 
 # Application definition
