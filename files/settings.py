@@ -94,20 +94,20 @@ WSGI_APPLICATION = 'files.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 # For Heroku Deployment Database configuration:
-#DATABASES = {
-#    'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
-#}
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'surr_development',
-        'USER': 'aleidavieyra',
-        'PASSWORD': 'salmarios21',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
+   'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'surr_development',
+#         'USER': 'aleidavieyra',
+#         'PASSWORD': 'salmarios21',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
