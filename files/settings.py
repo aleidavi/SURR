@@ -34,7 +34,7 @@ DEBUG = False
 #    "http://localhost:3000",  # for local development
 #]
 
-ALLOWED_HOSTS = ['https://surr-92ba55f1fcdd.herokuapp.com/',]
+ALLOWED_HOSTS = ['https://surr-92ba55f1fcdd.herokuapp.com/']
 
 
 # Application definition
@@ -139,7 +139,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Add this for collectstatic
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')  # Add this for collectstatic
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 # Whitenoise static file compression
