@@ -92,6 +92,7 @@ WSGI_APPLICATION = 'files.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(conn_max_age=600, ssl_require=True, default=os.environ.get('DATABASE_URL'))
 }
+print(f"DATABASE_URL: {os.environ.get('DATABASE_URL')}")
 
 #DATABASES = {
 #    'default': {
@@ -139,7 +140,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')  # Add this for collectstatic
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Add this for collectstatic
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 # Whitenoise static file compression
@@ -156,3 +157,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+
+
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
