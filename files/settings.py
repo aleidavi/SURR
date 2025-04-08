@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'files.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(conn_max_age=600, ssl_require=True, default=os.environ.get('DATABASE_URL'))
 }
-print(f"DATABASE_URL: {os.environ.get('DATABASE_URL')}")
+
 
 #DATABASES = {
 #    'default': {
