@@ -8,11 +8,16 @@ from ..models import Landlord, Property, Tenant
 from ..serializers import LandlordSerializer, PropertySerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, generics
 from django.shortcuts import render
 from django.contrib.auth.models import Landlord
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
+# Create view for LandlordUser:
+class CreateLandlordView(generics.CreateAPIView):
+	queryset = Landlord.objects.all()
+	serializer_class = Landlord
+	permission_classes = [AllowAny]
 
 
 @api_view(['POST'])
