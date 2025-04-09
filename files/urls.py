@@ -19,6 +19,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from .views import home_staff_views, landlord_views, property_views, tenant_views
+from views.landlord_views import CreateLandlordView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 
 urlpatterns = [
