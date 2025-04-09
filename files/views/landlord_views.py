@@ -3,13 +3,17 @@
 	endpoints associated with landlord endpoints
 
 '''
-from django.http import JsonResponse
+
 from ..models import Landlord, Property, Tenant
 from ..serializers import LandlordSerializer, PropertySerializer
 from rest_framework.decorators import api_view
-from django.http import Http404
 from rest_framework.response import Response
 from rest_framework import status
+from django.shortcuts import render
+from django.contrib.auth.models import Landlord
+from rest_framework.permissions import IsAuthenticated, AllowAny
+
+
 
 @api_view(['POST'])
 def landlord_list(request, format=None):
