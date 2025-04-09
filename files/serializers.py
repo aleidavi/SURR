@@ -15,7 +15,7 @@ class LandlordSerializer(serializers.ModelSerializer):
 
 	def create(self, validated_data):
 		landlord = User.objects.create_user(**validated_data)
-		return User
+		return landlord
 
 
 class TenantSerializer(serializers.ModelSerializer):
