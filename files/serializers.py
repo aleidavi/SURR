@@ -1,13 +1,12 @@
 from rest_framework import serializers
 from .models import Landlord, Tenant, Property
-from django.contrib.auth.models import User
+from django.contrib.auth.models import Landlord
 
 
 
 class LandlordSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Landlord
-
 		fields = ['id', 'username', 'password']
 		extra_kwargs = {'password': {'write_only': True}}
 
