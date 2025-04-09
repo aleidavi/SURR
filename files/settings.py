@@ -25,6 +25,7 @@ DEBUG = True
 # ]
 
 ALLOWED_HOSTS = ['surr-92ba55f1fcdd.herokuapp.com']
+# ALLOWED_HOSTS = ['*']
 
 
 # Application definition
