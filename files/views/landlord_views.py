@@ -13,7 +13,7 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
-# Create view for LandlordUser:
+# Create view for LandlordUser
 class CreateLandlordView(generics.CreateAPIView):
 	queryset = User.objects.all()
 	serializer_class = LandlordSerializer
