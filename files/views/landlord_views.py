@@ -15,6 +15,9 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 
 # Create view for LandlordUser
 class CreateLandlordView(generics.CreateAPIView):
+	"""
+	Create a new landlord user.
+	"""
 	queryset = User.objects.all()
 	serializer_class = LandlordSerializer
 	permission_classes = [AllowAny]
