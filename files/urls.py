@@ -27,9 +27,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
 
-	path('landlord/register/', CreateLandlordView.as_view(), name='register_landlord'),
-    path('landlord/token/', TokenObtainPairView.as_view(), name='get_landlord_token'),
-    path('landlord/token/refresh/', TokenRefreshView.as_view(), name='refresh_landlord_token'),
-    path('landlord/api-auth/',include("rest_framework.urls")),
+	path('api/landlord/register/', CreateLandlordView.as_view(), name='register_landlord'),
+    path('api/landlord/token/', TokenObtainPairView.as_view(), name='get_landlord_token'),
+    path('api/landlord/token/refresh/', TokenRefreshView.as_view(), name='refresh_landlord_token'),
+    path('api-auth/',include("rest_framework.urls")),
+
+    path('api/', include('api.urls')),
 	
 ]
