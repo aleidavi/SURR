@@ -28,5 +28,6 @@ class PropertySerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Property
 		fields = '__all__'
+		extra_kwargs = {'landlord': {'required': True}}
 
 

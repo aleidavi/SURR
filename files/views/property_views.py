@@ -2,14 +2,42 @@
 	property_views.py is used to create ALL 
 	endpoints associated with PROPERTY endpoints
 '''
-from django.http import JsonResponse
 from files.models import Landlord, Property, Tenant
 from files.serializers import LandlordSerializer, PropertySerializer
 from rest_framework.decorators import api_view
-from django.http import Http404
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, generics
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.shortcuts import get_object_or_404
+
+
+
+class PropertyListCreate(generics.ListCreateAPIView):
+
+	"""
+		Endpoint route allows landlord user to:
+			read all properties, of the current landlord,
+			post new properties (add/create) to their current properties list.
+	"""
+	serializer_class = PropertySerializer
+	permission_classes = [IsAuthenticated]
+
+	# To get /obtain user interacting with this root ->
+	def get_queryset(self):
+		user = self.request.user
+
+		# Used to view properties owned/created by Landlord and not other users
+		return Property.objects.filter(landlord=user)
+	
+	# Function for custom create method
+	# Overrides the default create method of the generics views class in Django
+	def perform_create(self, serializer):
+
+		if serializer.is_valid():
+			serializer.save(landlord=self.request.user)
+		else: 
+			print(serializer.errors)
+
 
 
 @api_view(['GET', 'POST', 'DELETE']) 
