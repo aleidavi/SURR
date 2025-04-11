@@ -38,6 +38,18 @@ class PropertyListCreate(generics.ListCreateAPIView):
 		else: 
 			print(serializer.errors)
 
+class PropertyDelete(generics.DestroyAPIView):
+	"""
+		Endpoint route allows landlord user to delete a property from their properties list.
+	"""
+
+	serializer_class = PropertySerializer
+	permission_classes = [IsAuthenticated]
+
+	def get_queryset(self):
+		user = self.request.user
+		return Property.objects.filter(landlord=user)
+
 
 
 @api_view(['GET', 'POST', 'DELETE']) 

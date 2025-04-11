@@ -25,22 +25,11 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-	path('home/landlords', home_staff_views.home_landlord_list),
-	path('home/properties', home_staff_views.home_property_list),
-	path('home/tenants', home_staff_views.home_tenants_list),
+
 
 	path('landlord/register/', CreateLandlordView.as_view(), name='register_landlord'),
     path('landlord/token/', TokenObtainPairView.as_view(), name='get_landlord_token'),
     path('landlord/token/refresh/', TokenRefreshView.as_view(), name='refresh_landlord_token'),
     path('landlord/api-auth/',include("rest_framework.urls")),
 	
-	path('landlords/', landlord_views.landlord_list),
-	path('landlords/<int:landlord_id>', landlord_views.landlord_detail),
-	
-	path('landlords/<int:landlord_id>/properties', property_views.landlord_property_list),
-	path('landlords/<int:landlord_id>/properties/<property_id>', property_views.landlord_property_detail),
-	
-	path('tenants/', tenant_views.tenant_list),
-	path('tenants/<int:tenant_id>', tenant_views.tenant_account_detail),
-	path('tenants/<int:tenant_id>/properties', tenant_views.tenant_properties_detail)
 ]
